@@ -1,6 +1,5 @@
 package com.uma.dao.impl;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,13 +18,12 @@ public class DefaultUserDao implements UserDao {
 
 	@Override
 	public User read(String key) {
-		return cachedUsers.parallelStream()
-				.filter(user -> key.equals(user.getEmail()))
-				.collect(Collectors.toSet()).iterator().next();
+		return cachedUsers.parallelStream().filter(user -> key.equals(user.getEmail())).collect(Collectors.toSet())
+				.iterator().next();
 	}
 
 	@Override
-	public Collection<User> readAll() {
+	public Set<User> readAll() {
 		return cachedUsers;
 	}
 
@@ -38,7 +36,6 @@ public class DefaultUserDao implements UserDao {
 	@Override
 	public void delete(User object) {
 		Optional<User> objectOpt = Optional.ofNullable(object);
-		cachedUsers.removeIf(user -> user.getEmail().equals(
-				objectOpt.get().getEmail()));
+		cachedUsers.removeIf(user -> user.getEmail().equals(objectOpt.get().getEmail()));
 	}
 }

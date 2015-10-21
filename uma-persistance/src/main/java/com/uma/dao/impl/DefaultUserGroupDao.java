@@ -1,6 +1,5 @@
 package com.uma.dao.impl;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,13 +18,12 @@ public class DefaultUserGroupDao implements UserGroupDao {
 
 	@Override
 	public UserGroup read(Long key) {
-		return cachedUserGroups.parallelStream()
-				.filter(userGroup -> key.equals(userGroup.getId()))
+		return cachedUserGroups.parallelStream().filter(userGroup -> key.equals(userGroup.getId()))
 				.collect(Collectors.toSet()).iterator().next();
 	}
 
 	@Override
-	public Collection<UserGroup> readAll() {
+	public Set<UserGroup> readAll() {
 		return cachedUserGroups;
 	}
 
@@ -38,7 +36,6 @@ public class DefaultUserGroupDao implements UserGroupDao {
 	@Override
 	public void delete(UserGroup object) {
 		Optional<UserGroup> objectOpt = Optional.ofNullable(object);
-		cachedUserGroups.removeIf(userGroup -> userGroup.getId() == objectOpt
-				.get().getId());
+		cachedUserGroups.removeIf(userGroup -> userGroup.getId() == objectOpt.get().getId());
 	}
 }

@@ -1,6 +1,5 @@
 package com.uma.dao.impl;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,13 +18,12 @@ public class DefaultPermissionDao implements PermissionDao {
 
 	@Override
 	public Permission read(Long key) {
-		return cachedPermissions.parallelStream()
-				.filter(permission -> key.equals(permission.getId()))
+		return cachedPermissions.parallelStream().filter(permission -> key.equals(permission.getId()))
 				.collect(Collectors.toSet()).iterator().next();
 	}
 
 	@Override
-	public Collection<Permission> readAll() {
+	public Set<Permission> readAll() {
 		return cachedPermissions;
 	}
 
@@ -38,8 +36,6 @@ public class DefaultPermissionDao implements PermissionDao {
 	@Override
 	public void delete(Permission object) {
 		Optional<Permission> objectOpt = Optional.ofNullable(object);
-		cachedPermissions
-				.removeIf(permission -> permission.getId() == objectOpt.get()
-						.getId());
+		cachedPermissions.removeIf(permission -> permission.getId() == objectOpt.get().getId());
 	}
 }

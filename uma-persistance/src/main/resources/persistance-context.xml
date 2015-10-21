@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="userDao" class="com.uma.dao.impl.DefaultUserDao" />
+
+	<bean id="permissionDao" class="com.uma.dao.impl.DefaultPermissionDao" />
+
+	<bean id="userGroupDao" class="com.uma.dao.impl.DefaultUserGroupDao" />
+</beans>
