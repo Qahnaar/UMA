@@ -4,10 +4,13 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.uma.dao.UserGroupDao;
 import com.uma.domain.UserGroup;
 import com.uma.services.UserGroupService;
 
+@Service("userGroupService")
 public class DefaultUserGroupService implements UserGroupService {
 
 	@Inject

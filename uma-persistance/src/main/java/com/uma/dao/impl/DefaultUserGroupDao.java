@@ -1,5 +1,6 @@
 package com.uma.dao.impl;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,6 +12,10 @@ public class DefaultUserGroupDao implements UserGroupDao {
 
 	private Set<UserGroup> cachedUserGroups;
 
+	public void init() {
+		cachedUserGroups = new HashSet<>();
+	}
+	
 	@Override
 	public void create(UserGroup object) {
 		cachedUserGroups.add(object);

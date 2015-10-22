@@ -4,10 +4,13 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Service;
+
 import com.uma.dao.UserDao;
 import com.uma.domain.User;
 import com.uma.services.UserService;
 
+@Service("userService")
 public class DefaultUserService implements UserService {
 
 	@Inject

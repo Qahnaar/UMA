@@ -1,5 +1,6 @@
 package com.uma.dao.impl;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,6 +12,10 @@ public class DefaultUserDao implements UserDao {
 
 	private Set<User> cachedUsers;
 
+	public void init() {
+		cachedUsers = new HashSet<>();
+	}
+	
 	@Override
 	public void create(User object) {
 		cachedUsers.add(object);

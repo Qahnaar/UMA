@@ -13,7 +13,8 @@ import com.uma.services.PermissionService;
 @Facade
 public class DefaultPermissionFacade implements PermissionFacade {
 
-	private final static Logger LOG = LoggerFactory.getLogger(DefaultPermissionFacade.class);
+	private final static Logger LOG = LoggerFactory
+			.getLogger(DefaultPermissionFacade.class);
 
 	private PermissionService permissionService;
 

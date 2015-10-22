@@ -1,5 +1,6 @@
 package com.uma.dao.impl;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,6 +11,10 @@ import com.uma.domain.Permission;
 public class DefaultPermissionDao implements PermissionDao {
 
 	private Set<Permission> cachedPermissions;
+
+	public void init() {
+		cachedPermissions = new HashSet<>();
+	}
 
 	@Override
 	public void create(Permission object) {
