@@ -25,9 +25,9 @@ public class DefaultPermissionFacade implements PermissionFacade {
 	}
 
 	@Override
-	public Permission find(Permission object) {
-		LOG.debug("Finding permission with id " + object.getId());
-		return permissionService.read(object.getId());
+	public Permission find(Long object) {
+		LOG.debug("Finding permission with id " + object);
+		return permissionService.read(object);
 	}
 
 	@Override

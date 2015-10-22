@@ -25,9 +25,9 @@ public class DefaultUserGroupFacade implements UserGroupFacade {
 	}
 
 	@Override
-	public UserGroup find(UserGroup object) {
-		LOG.debug("Finding userGroup with id " + object.getId());
-		return userGroupService.read(object.getId());
+	public UserGroup find(Long object) {
+		LOG.debug("Finding userGroup with id " + object);
+		return userGroupService.read(object);
 	}
 
 	@Override

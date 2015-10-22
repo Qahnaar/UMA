@@ -25,9 +25,9 @@ public class DefaultUserFacade implements UserFacade {
 	}
 
 	@Override
-	public User find(User object) {
-		LOG.debug("Finding user with email " + object.getEmail());
-		return userService.read(object.getEmail());
+	public User find(String object) {
+		LOG.debug("Finding user with email " + object);
+		return userService.read(object);
 	}
 
 	@Override
