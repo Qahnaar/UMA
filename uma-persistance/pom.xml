@@ -9,4 +9,12 @@
 	</parent>
 	<artifactId>uma-persistance</artifactId>
 	<description>User Management Application Persistance Module</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.uma</groupId>
+			<artifactId>uma-domain</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 </project>
