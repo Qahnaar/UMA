@@ -13,8 +13,7 @@ import com.uma.services.UserGroupService;
 @Facade
 public class DefaultUserGroupFacade implements UserGroupFacade {
 
-	private final static Logger LOG = LoggerFactory
-			.getLogger(DefaultUserGroupFacade.class);
+	private final static Logger LOG = LoggerFactory.getLogger(DefaultUserGroupFacade.class);
 
 	private UserGroupService userGroupService;
 

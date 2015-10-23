@@ -2,12 +2,29 @@ package com.uma.domain;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "user_groups")
 public class UserGroup {
-	
+
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private long id;
-	
+
+	@OneToMany
+	@JoinColumn(name = "user_group_id")
 	private Set<User> users;
-	
+
+	@OneToMany
+	@JoinColumn(name = "user_group_id")
 	private Set<Permission> permissions;
 
 	public long getId() {

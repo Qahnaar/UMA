@@ -35,12 +35,12 @@ public class UserController {
 	public void saveUser(@RequestBody User user) {
 		userFacade.save(user);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.PUT)
 	public void updateUser(@RequestBody User user) {
 		userFacade.merge(user);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.DELETE)
 	public void deleteUser(@RequestBody User user) {
 		userFacade.remove(user);

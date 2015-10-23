@@ -1,46 +1,44 @@
 package com.uma.dao.impl;
 
-import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import org.hibernate.SessionFactory;
 
 import com.uma.dao.UserDao;
 import com.uma.domain.User;
 
 public class DefaultUserDao implements UserDao {
 
-	private Set<User> cachedUsers;
+	private SessionFactory sessionFactory;
 
-	public void init() {
-		cachedUsers = new HashSet<>();
-	}
-	
 	@Override
 	public void create(User object) {
-		cachedUsers.add(object);
+		sessionFactory.getCurrentSession().save(object);
 	}
 
 	@Override
 	public User read(String key) {
-		return cachedUsers.parallelStream().filter(user -> key.equals(user.getEmail())).collect(Collectors.toSet())
-				.iterator().next();
+		return (User) sessionFactory.getCurrentSession().get(User.class, key);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<User> readAll() {
-		return cachedUsers;
+		return (Set<User>) sessionFactory.getCurrentSession().createCriteria(User.class).list();
 	}
 
 	@Override
 	public void update(User object) {
-		delete(object);
-		create(object);
+		sessionFactory.getCurrentSession().update(object);
 	}
 
 	@Override
 	public void delete(User object) {
-		Optional<User> objectOpt = Optional.ofNullable(object);
-		cachedUsers.removeIf(user -> user.getEmail().equals(objectOpt.get().getEmail()));
+		sessionFactory.getCurrentSession().delete(object);
+	}
+
+	@Override
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 }
