@@ -1,5 +1,6 @@
 package com.uma.dao.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
@@ -24,7 +25,7 @@ public class DefaultUserGroupDao implements UserGroupDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<UserGroup> readAll() {
-		return (Set<UserGroup>) sessionFactory.getCurrentSession().createCriteria(UserGroup.class).list();
+		return new HashSet<>(sessionFactory.getCurrentSession().createCriteria(UserGroup.class).list());
 	}
 
 	@Override

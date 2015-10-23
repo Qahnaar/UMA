@@ -1,5 +1,6 @@
 package com.uma.dao.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
@@ -24,7 +25,7 @@ public class DefaultUserDao implements UserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<User> readAll() {
-		return (Set<User>) sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		return new HashSet<>(sessionFactory.getCurrentSession().createCriteria(User.class).list());
 	}
 
 	@Override

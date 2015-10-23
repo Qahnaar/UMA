@@ -1,5 +1,6 @@
 package com.uma.dao.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.SessionFactory;
@@ -24,7 +25,7 @@ public class DefaultPermissionDao implements PermissionDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Set<Permission> readAll() {
-		return (Set<Permission>) sessionFactory.getCurrentSession().createCriteria(Permission.class).list();
+		return new HashSet<>(sessionFactory.getCurrentSession().createCriteria(Permission.class).list());
 	}
 
 	@Override
