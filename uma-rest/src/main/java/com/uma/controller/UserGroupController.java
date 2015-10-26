@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uma.controller.util.ControllerConstants;
-import com.uma.domain.UserGroup;
-import com.uma.facades.UserGroupFacade;
+import com.uma.facades.dtos.user.group.DefaultUserGroupDto;
+import com.uma.facades.user.group.UserGroupFacade;
 
 @RestController
 @RequestMapping(value = ControllerConstants.Mappings.GROUPS, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -22,27 +22,27 @@ public class UserGroupController {
 	private UserGroupFacade userGroupFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Set<UserGroup> getUserGroups() {
+	public Set<DefaultUserGroupDto> getUserGroups() {
 		return userGroupFacade.findAll();
 	}
 
 	@RequestMapping(value = ControllerConstants.Mappings.GROUP, method = RequestMethod.GET)
-	public UserGroup getUserGroup(@PathVariable("id") String id) {
+	public DefaultUserGroupDto getUserGroup(@PathVariable("id") String id) {
 		return userGroupFacade.find(Long.valueOf(id));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void saveUserGroup(@RequestBody UserGroup userGroup) {
+	public void saveUserGroup(@RequestBody DefaultUserGroupDto userGroup) {
 		userGroupFacade.save(userGroup);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updateUserGroup(@RequestBody UserGroup userGroup) {
+	public void updateUserGroup(@RequestBody DefaultUserGroupDto userGroup) {
 		userGroupFacade.merge(userGroup);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
-	public void deleteUserGroup(@RequestBody UserGroup userGroup) {
+	public void deleteUserGroup(@RequestBody DefaultUserGroupDto userGroup) {
 		userGroupFacade.remove(userGroup);
 	}
 }

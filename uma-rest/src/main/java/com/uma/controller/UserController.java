@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uma.controller.util.ControllerConstants;
-import com.uma.domain.User;
-import com.uma.facades.UserFacade;
+import com.uma.facades.dtos.user.DefaultUserDto;
+import com.uma.facades.user.UserFacade;
 
 @RestController
 @RequestMapping(value = ControllerConstants.Mappings.USERS, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -22,27 +22,27 @@ public class UserController {
 	private UserFacade userFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Set<User> getUsers() {
+	public Set<DefaultUserDto> getUsers() {
 		return userFacade.findAll();
 	}
 
 	@RequestMapping(value = ControllerConstants.Mappings.USER, method = RequestMethod.GET)
-	public User getUser(@PathVariable("email") String email) {
-		return userFacade.find(email);
+	public DefaultUserDto getUser(@PathVariable("id") Long id) {
+		return userFacade.find(id);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void saveUser(@RequestBody User user) {
+	public void saveUser(@RequestBody DefaultUserDto user) {
 		userFacade.save(user);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updateUser(@RequestBody User user) {
+	public void updateUser(@RequestBody DefaultUserDto user) {
 		userFacade.merge(user);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
-	public void deleteUser(@RequestBody User user) {
+	public void deleteUser(@RequestBody DefaultUserDto user) {
 		userFacade.remove(user);
 	}
 }

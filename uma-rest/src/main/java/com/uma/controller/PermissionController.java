@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uma.controller.util.ControllerConstants;
-import com.uma.domain.Permission;
-import com.uma.facades.PermissionFacade;
+import com.uma.facades.dtos.permission.DefaultPermissionDto;
+import com.uma.facades.permission.PermissionFacade;
 
 @RestController
 @RequestMapping(value = ControllerConstants.Mappings.PERMISSIONS, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -22,27 +22,27 @@ public class PermissionController {
 	private PermissionFacade permissionFacade;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Set<Permission> getPermissions() {
+	public Set<DefaultPermissionDto> getPermissions() {
 		return permissionFacade.findAll();
 	}
 
 	@RequestMapping(value = ControllerConstants.Mappings.PERMISSION, method = RequestMethod.GET)
-	public Permission getPermission(@PathVariable("id") String id) {
+	public DefaultPermissionDto getPermission(@PathVariable("id") String id) {
 		return permissionFacade.find(Long.valueOf(id));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public void savePermission(@RequestBody Permission permission) {
+	public void savePermission(@RequestBody DefaultPermissionDto permission) {
 		permissionFacade.save(permission);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-	public void updatePermission(@RequestBody Permission permission) {
+	public void updatePermission(@RequestBody DefaultPermissionDto permission) {
 		permissionFacade.merge(permission);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE)
-	public void deletePermission(@RequestBody Permission permission) {
+	public void deletePermission(@RequestBody DefaultPermissionDto permission) {
 		permissionFacade.remove(permission);
 	}
 }
