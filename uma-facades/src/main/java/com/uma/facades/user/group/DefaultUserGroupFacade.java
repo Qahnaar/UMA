@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.uma.domain.user.group.UserGroup;
 import com.uma.facades.annotation.Facade;
 import com.uma.facades.dtos.user.group.DefaultUserGroupDto;
-import com.uma.facades.populators.GenericPopulator;
+import com.uma.facades.mappers.GenericMapper;
 import com.uma.services.user.group.UserGroupService;
 
 @Facade
@@ -21,38 +21,38 @@ public class DefaultUserGroupFacade implements UserGroupFacade {
 
 	private UserGroupService userGroupService;
 
-	private GenericPopulator<UserGroup, DefaultUserGroupDto> userGroupPopulator;
+	private GenericMapper<UserGroup, DefaultUserGroupDto> userGroupMapper;
 
-	private GenericPopulator<DefaultUserGroupDto, UserGroup> inverseUserGroupPopulator;
+	private GenericMapper<DefaultUserGroupDto, UserGroup> inverseUserGroupMapper;
 
 	@Override
 	public void save(DefaultUserGroupDto object) {
 		LOG.debug("Saving userGroup with id " + object.getId());
-		userGroupService.create(inverseUserGroupPopulator.populate(object));
+		userGroupService.create(inverseUserGroupMapper.map(object));
 	}
 
 	@Override
 	public DefaultUserGroupDto find(Long object) {
 		LOG.debug("Finding userGroup with id " + object);
-		return userGroupPopulator.populate(userGroupService.read(object));
+		return userGroupMapper.map(userGroupService.read(object));
 	}
 
 	@Override
 	public Set<DefaultUserGroupDto> findAll() {
 		LOG.debug("Finding all userGroups");
-		return userGroupPopulator.populateAll(userGroupService.readAll());
+		return userGroupMapper.mapAll(userGroupService.readAll());
 	}
 
 	@Override
 	public void merge(DefaultUserGroupDto object) {
 		LOG.debug("Merging userGroup with id " + object.getId());
-		userGroupService.update(inverseUserGroupPopulator.populate(object));
+		userGroupService.update(inverseUserGroupMapper.map(object));
 	}
 
 	@Override
 	public void remove(DefaultUserGroupDto object) {
 		LOG.debug("Removing userGroup with id " + object.getId());
-		userGroupService.delete(inverseUserGroupPopulator.populate(object));
+		userGroupService.delete(inverseUserGroupMapper.map(object));
 	}
 
 	@Override
@@ -61,13 +61,13 @@ public class DefaultUserGroupFacade implements UserGroupFacade {
 	}
 
 	@Override
-	public void setUserGroupPopulator(GenericPopulator<UserGroup, DefaultUserGroupDto> userGroupPopulator) {
-		this.userGroupPopulator = userGroupPopulator;
+	public void setUserGroupMapper(GenericMapper<UserGroup, DefaultUserGroupDto> userGroupMapper) {
+		this.userGroupMapper = userGroupMapper;
 	}
 
 	@Override
-	public void setInverseUserGroupPopulator(
-			GenericPopulator<DefaultUserGroupDto, UserGroup> inverseUserGroupPopulator) {
-		this.inverseUserGroupPopulator = inverseUserGroupPopulator;
+	public void setInverseUserGroupMapper(
+			GenericMapper<DefaultUserGroupDto, UserGroup> inverseUserGroupMapper) {
+		this.inverseUserGroupMapper = inverseUserGroupMapper;
 	}
 }

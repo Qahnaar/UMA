@@ -3,13 +3,12 @@ package com.uma.services.user;
 import java.util.Set;
 
 import javax.inject.Inject;
-
-import org.springframework.stereotype.Service;
+import javax.inject.Named;
 
 import com.uma.dao.user.UserDao;
 import com.uma.domain.user.User;
 
-@Service("userService")
+@Named("userService")
 public class DefaultUserService implements UserService {
 
 	@Inject

@@ -3,13 +3,12 @@ package com.uma.services.permission;
 import java.util.Set;
 
 import javax.inject.Inject;
-
-import org.springframework.stereotype.Service;
+import javax.inject.Named;
 
 import com.uma.dao.permission.PermissionDao;
 import com.uma.domain.permission.Permission;
 
-@Service("permissionService")
+@Named("permissionService")
 public class DefaultPermissionService implements PermissionService {
 
 	@Inject

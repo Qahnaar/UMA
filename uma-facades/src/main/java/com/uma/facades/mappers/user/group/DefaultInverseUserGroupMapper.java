@@ -1,4 +1,4 @@
-package com.uma.facades.populators.user.group;
+package com.uma.facades.mappers.user.group;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,9 +10,9 @@ import com.uma.facades.converters.DefaultConverter;
 import com.uma.facades.dtos.permission.DefaultPermissionDto;
 import com.uma.facades.dtos.user.DefaultUserDto;
 import com.uma.facades.dtos.user.group.DefaultUserGroupDto;
-import com.uma.facades.populators.GenericPopulator;
+import com.uma.facades.mappers.GenericMapper;
 
-public class DefaultInverseUserGroupPopulator implements GenericPopulator<DefaultUserGroupDto, UserGroup> {
+public class DefaultInverseUserGroupMapper implements GenericMapper<DefaultUserGroupDto, UserGroup> {
 
 	private DefaultConverter<DefaultUserGroupDto, UserGroup> inverseUserGroupConverter;
 
@@ -21,7 +21,7 @@ public class DefaultInverseUserGroupPopulator implements GenericPopulator<Defaul
 	private DefaultConverter<DefaultPermissionDto, Permission> inversePermissionConverter;
 
 	@Override
-	public UserGroup populate(DefaultUserGroupDto source) {
+	public UserGroup map(DefaultUserGroupDto source) {
 		UserGroup userGroup = inverseUserGroupConverter.convert(source);
 		userGroup.setPermissions(inversePermissionConverter.convertAll(source.getPermissions()));
 		userGroup.setUsers(inverseUserConverter.convertAll(source.getUsers()));
@@ -29,8 +29,8 @@ public class DefaultInverseUserGroupPopulator implements GenericPopulator<Defaul
 	}
 
 	@Override
-	public Set<UserGroup> populateAll(Set<DefaultUserGroupDto> source) {
-		return source.parallelStream().map(userGroup -> populate(userGroup)).collect(Collectors.toSet());
+	public Set<UserGroup> mapAll(Set<DefaultUserGroupDto> source) {
+		return source.parallelStream().map(userGroup -> map(userGroup)).collect(Collectors.toSet());
 	}
 
 	public void setInverseUserGroupConverter(

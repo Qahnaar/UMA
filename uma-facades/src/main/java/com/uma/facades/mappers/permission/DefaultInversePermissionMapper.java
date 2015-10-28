@@ -1,4 +1,4 @@
-package com.uma.facades.populators.permission;
+package com.uma.facades.mappers.permission;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -6,20 +6,20 @@ import java.util.stream.Collectors;
 import com.uma.domain.permission.Permission;
 import com.uma.facades.converters.DefaultConverter;
 import com.uma.facades.dtos.permission.DefaultPermissionDto;
-import com.uma.facades.populators.GenericPopulator;
+import com.uma.facades.mappers.GenericMapper;
 
-public class DefaultInversePermissionPopulator implements GenericPopulator<DefaultPermissionDto, Permission> {
+public class DefaultInversePermissionMapper implements GenericMapper<DefaultPermissionDto, Permission> {
 
 	private DefaultConverter<DefaultPermissionDto, Permission> defaultInversePermissionConverter;
 
 	@Override
-	public Permission populate(DefaultPermissionDto source) {
+	public Permission map(DefaultPermissionDto source) {
 		return defaultInversePermissionConverter.convert(source);
 	}
 
 	@Override
-	public Set<Permission> populateAll(Set<DefaultPermissionDto> source) {
-		return source.parallelStream().map(permission -> populate(permission)).collect(Collectors.toSet());
+	public Set<Permission> mapAll(Set<DefaultPermissionDto> source) {
+		return source.parallelStream().map(permission -> map(permission)).collect(Collectors.toSet());
 	}
 
 	public void setDefaultInversePermissionConverter(

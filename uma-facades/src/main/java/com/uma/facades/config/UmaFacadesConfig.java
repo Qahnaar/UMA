@@ -18,14 +18,14 @@ import com.uma.facades.converters.user.group.DefaultUserGroupConverter;
 import com.uma.facades.dtos.permission.DefaultPermissionDto;
 import com.uma.facades.dtos.user.DefaultUserDto;
 import com.uma.facades.dtos.user.group.DefaultUserGroupDto;
+import com.uma.facades.mappers.permission.DefaultInversePermissionMapper;
+import com.uma.facades.mappers.permission.DefaultPermissionMapper;
+import com.uma.facades.mappers.user.DefaultInverseUserMapper;
+import com.uma.facades.mappers.user.DefaultUserMapper;
+import com.uma.facades.mappers.user.group.DefaultInverseUserGroupMapper;
+import com.uma.facades.mappers.user.group.DefaultUserGroupMapper;
 import com.uma.facades.permission.DefaultPermissionFacade;
 import com.uma.facades.permission.PermissionFacade;
-import com.uma.facades.populators.permission.DefaultInversePermissionPopulator;
-import com.uma.facades.populators.permission.DefaultPermissionPopulator;
-import com.uma.facades.populators.user.DefaultInverseUserPopulator;
-import com.uma.facades.populators.user.DefaultUserPopulator;
-import com.uma.facades.populators.user.group.DefaultInverseUserGroupPopulator;
-import com.uma.facades.populators.user.group.DefaultUserGroupPopulator;
 import com.uma.facades.user.DefaultUserFacade;
 import com.uma.facades.user.UserFacade;
 import com.uma.facades.user.group.DefaultUserGroupFacade;
@@ -50,8 +50,8 @@ public class UmaFacadesConfig {
 	public UserFacade getUserFacade() {
 		UserFacade userFacade = new DefaultUserFacade();
 		userFacade.setUserService(userService);
-		userFacade.setUserPopulator(getUserPopulator());
-		userFacade.setInverseUserPopulator(getInverseUserPopulator());
+		userFacade.setUserMapper(getUserPopulator());
+		userFacade.setInverseUserMapper(getInverseUserPopulator());
 		return userFacade;
 	}
 
@@ -59,8 +59,8 @@ public class UmaFacadesConfig {
 	public PermissionFacade getPermissionFacade() {
 		PermissionFacade permissionFacade = new DefaultPermissionFacade();
 		permissionFacade.setPermissionService(permissionService);
-		permissionFacade.setPermissionPopulator(getPermissionPopulator());
-		permissionFacade.setInversePermissionPopulator(getInversePermissionPopulator());
+		permissionFacade.setPermissionMapper(getPermissionPopulator());
+		permissionFacade.setInversePermissionMapper(getInversePermissionPopulator());
 		return permissionFacade;
 	}
 
@@ -68,8 +68,8 @@ public class UmaFacadesConfig {
 	public UserGroupFacade getUserGroupFacade() {
 		UserGroupFacade userGroupFacade = new DefaultUserGroupFacade();
 		userGroupFacade.setUserGroupService(userGroupService);
-		userGroupFacade.setUserGroupPopulator(getUserGroupPopulator());
-		userGroupFacade.setInverseUserGroupPopulator(getInverseUserGroupPopulator());
+		userGroupFacade.setUserGroupMapper(getUserGroupPopulator());
+		userGroupFacade.setInverseUserGroupMapper(getInverseUserGroupPopulator());
 		return userGroupFacade;
 	}
 
@@ -104,22 +104,22 @@ public class UmaFacadesConfig {
 	}
 
 	@Bean
-	public DefaultUserPopulator getUserPopulator() {
-		DefaultUserPopulator userPopulator = new DefaultUserPopulator();
+	public DefaultUserMapper getUserPopulator() {
+		DefaultUserMapper userPopulator = new DefaultUserMapper();
 		userPopulator.setDefaultUserConverter(getDefaultUserConverter());
 		return userPopulator;
 	}
 
 	@Bean
-	public DefaultPermissionPopulator getPermissionPopulator() {
-		DefaultPermissionPopulator userPopulator = new DefaultPermissionPopulator();
+	public DefaultPermissionMapper getPermissionPopulator() {
+		DefaultPermissionMapper userPopulator = new DefaultPermissionMapper();
 		userPopulator.setPermissionConverter(getDefaultPermissionConverter());
 		return userPopulator;
 	}
 
 	@Bean
-	public DefaultUserGroupPopulator getUserGroupPopulator() {
-		DefaultUserGroupPopulator userGroupPopulator = new DefaultUserGroupPopulator();
+	public DefaultUserGroupMapper getUserGroupPopulator() {
+		DefaultUserGroupMapper userGroupPopulator = new DefaultUserGroupMapper();
 		userGroupPopulator.setUserGroupConverter(getDefaultUserGroupConverter());
 		userGroupPopulator.setUserConverter(getDefaultUserConverter());
 		userGroupPopulator.setPermissionConverter(getDefaultPermissionConverter());
@@ -127,22 +127,22 @@ public class UmaFacadesConfig {
 	}
 
 	@Bean
-	public DefaultInverseUserPopulator getInverseUserPopulator() {
-		DefaultInverseUserPopulator userPopulator = new DefaultInverseUserPopulator();
+	public DefaultInverseUserMapper getInverseUserPopulator() {
+		DefaultInverseUserMapper userPopulator = new DefaultInverseUserMapper();
 		userPopulator.setDefaultInverseUserConverter(getDefaultInverseUserConverter());
 		return userPopulator;
 	}
 
 	@Bean
-	public DefaultInversePermissionPopulator getInversePermissionPopulator() {
-		DefaultInversePermissionPopulator userPopulator = new DefaultInversePermissionPopulator();
+	public DefaultInversePermissionMapper getInversePermissionPopulator() {
+		DefaultInversePermissionMapper userPopulator = new DefaultInversePermissionMapper();
 		userPopulator.setDefaultInversePermissionConverter(getDefaultInversePermissionConverter());
 		return userPopulator;
 	}
 
 	@Bean
-	public DefaultInverseUserGroupPopulator getInverseUserGroupPopulator() {
-		DefaultInverseUserGroupPopulator userGroupPopulator = new DefaultInverseUserGroupPopulator();
+	public DefaultInverseUserGroupMapper getInverseUserGroupPopulator() {
+		DefaultInverseUserGroupMapper userGroupPopulator = new DefaultInverseUserGroupMapper();
 		userGroupPopulator.setInverseUserGroupConverter(getDefaultInverseUserGroupConverter());
 		userGroupPopulator.setInverseUserConverter(getDefaultInverseUserConverter());
 		userGroupPopulator.setInversePermissionConverter(getDefaultInversePermissionConverter());

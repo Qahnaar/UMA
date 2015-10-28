@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.uma.domain.permission.Permission;
 import com.uma.facades.annotation.Facade;
 import com.uma.facades.dtos.permission.DefaultPermissionDto;
-import com.uma.facades.populators.GenericPopulator;
+import com.uma.facades.mappers.GenericMapper;
 import com.uma.services.permission.PermissionService;
 
 @Facade
@@ -21,38 +21,38 @@ public class DefaultPermissionFacade implements PermissionFacade {
 
 	private PermissionService permissionService;
 
-	private GenericPopulator<Permission, DefaultPermissionDto> permissionPopulator;
+	private GenericMapper<Permission, DefaultPermissionDto> permissionMapper;
 
-	private GenericPopulator<DefaultPermissionDto, Permission> inversePermissionPopulator;
+	private GenericMapper<DefaultPermissionDto, Permission> inversePermissionMapper;
 
 	@Override
 	public void save(DefaultPermissionDto object) {
 		LOG.debug("Saving permission with id " + object.getId());
-		permissionService.create(inversePermissionPopulator.populate(object));
+		permissionService.create(inversePermissionMapper.map(object));
 	}
 
 	@Override
 	public DefaultPermissionDto find(Long object) {
 		LOG.debug("Finding permission with id " + object);
-		return permissionPopulator.populate(permissionService.read(object));
+		return permissionMapper.map(permissionService.read(object));
 	}
 
 	@Override
 	public Set<DefaultPermissionDto> findAll() {
 		LOG.debug("Finding all permissions");
-		return permissionPopulator.populateAll(permissionService.readAll());
+		return permissionMapper.mapAll(permissionService.readAll());
 	}
 
 	@Override
 	public void merge(DefaultPermissionDto object) {
 		LOG.debug("Merging permission with id " + object.getId());
-		permissionService.update(inversePermissionPopulator.populate(object));
+		permissionService.update(inversePermissionMapper.map(object));
 	}
 
 	@Override
 	public void remove(DefaultPermissionDto object) {
 		LOG.debug("Removing permission with id " + object.getId());
-		permissionService.delete(inversePermissionPopulator.populate(object));
+		permissionService.delete(inversePermissionMapper.map(object));
 	}
 
 	@Override
@@ -61,14 +61,14 @@ public class DefaultPermissionFacade implements PermissionFacade {
 	}
 
 	@Override
-	public void setPermissionPopulator(GenericPopulator<Permission, DefaultPermissionDto> permissionPopulator) {
-		this.permissionPopulator = permissionPopulator;
+	public void setPermissionMapper(GenericMapper<Permission, DefaultPermissionDto> permissionMapper) {
+		this.permissionMapper = permissionMapper;
 	}
 
 	@Override
-	public void setInversePermissionPopulator(
-			GenericPopulator<DefaultPermissionDto, Permission> inversePermissionPopulator) {
-		this.inversePermissionPopulator = inversePermissionPopulator;
+	public void setInversePermissionMapper(
+			GenericMapper<DefaultPermissionDto, Permission> inversePermissionMapper) {
+		this.inversePermissionMapper = inversePermissionMapper;
 	}
 
 }
