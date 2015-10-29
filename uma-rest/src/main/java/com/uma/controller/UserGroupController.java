@@ -3,7 +3,6 @@ package com.uma.controller;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ import com.uma.facades.dtos.user.group.DefaultUserGroupDto;
 import com.uma.facades.user.group.UserGroupFacade;
 
 @RestController
-@RequestMapping(value = ControllerConstants.Mappings.GROUPS, consumes = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = ControllerConstants.Mappings.GROUPS)
 public class UserGroupController {
 
 	@Autowired
